@@ -1,9 +1,19 @@
 import streamlit as st
 import subprocess
 import pandas as pd
+from PIL import Image
 # Title of the app
-st.title('Rent Finder')
-
+img=Image.open("outline.png")
+st.title('Urban Abode')
+# Add a background gradient color
+st.markdown("""
+    <style>
+        body {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            background-size: cover;
+        }
+    </style>
+    """, unsafe_allow_html=True)
 # Collecting location and rent preferences
 with st.form(key='rent_preferences_form'):
     st.write("Enter your location and rent preferences:")
@@ -19,13 +29,12 @@ if submit_rent_button:
     output = subprocess.run(command, capture_output=True, text=True)
 
     # Display output
-    st.write("Output from C++ program:")
+    st.write("Relevant Locations for your search")
     output_lines = output.stdout.strip().split('\n')
     table_data = [line.split(': ') for line in output_lines]
     column_names=["Location", "Name","Rent","Amenities","Number of Bedrooms","Total Score","Blank"]
     df=pd.DataFrame(table_data,columns=column_names)
     df=df.drop(df.columns[-1],axis=1)
     st.dataframe(df)
-    
 
-# Optionally, you can add more functionality here, such as searching for rentals based on the provided criteria
+    df['Link'] = '[More Info](https://www.real_estate_search.com)'

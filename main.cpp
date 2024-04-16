@@ -343,11 +343,6 @@ vector<sr> sr_query(node *node, float min_price, float max_price)
 }
 int main(int argc, char* argv[])
 {
-    // if (argc != 6)
-    // {
-    //     cout << "Usage: " << argv[0] << " <input_file>" << endl;
-    //     return 1;
-    // }
     while(1){
     //cout<<"Enter details"<<endl;
     string name=argv[1];
