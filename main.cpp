@@ -235,32 +235,25 @@ void insert(Node *&node, const Property &element)
                 node = new_root;
             }
         }
-    }
+    } 
 }
 std::string SearchResultToJson(const std::vector<SearchResult> &results)
 {
     std::stringstream ss;
-    ss << "[\n";
+   // ss << "[\n";
     for (size_t i = 0; i < results.size(); ++i)
     {
         const Property &p = results[i].e;
-        ss << "  {\n"
-           << "    \"element\": {\n"
-           << "      \"Location\": \"" << p.location << "\",\n"
-           << "      \"Name\": \"" << p.name << "\",\n"
-           << "      \"Rent per month\": " << p.price << ",\n"
-           << "      \"Amenities\": \"" << p.amenities << "\",\n"
-           << "      \"Number of Bedrooms\": " << p.num_bedrooms << "\n"
-           << "    },\n"
-           << "    \"total_score\": " << results[i].total_score << "\n"
-           << "  }";
-        if (i != results.size() - 1)
-        {
-            ss << ",";
-        }
+        ss << p.location << ": "
+           << p.name << ": "
+           << p.price << ": "
+           << p.amenities << ": "
+           << p.num_bedrooms << ": "
+           <<results[i].total_score << ": ";
         ss << "\n";
     }
-    ss << "]";
+    cout<<endl;
+   // ss << "]";
     return ss.str();
 }
 node *builp(vector<sr> &elements, int start, int end)
@@ -348,7 +341,7 @@ vector<sr> sr_query(node *node, float min_price, float max_price)
     results.insert(results.end(), right_results.begin(), right_results.end());
     return results;
 }
-int main(void)
+int main(int argc, char* argv[])
 {
     // if (argc != 6)
     // {
@@ -356,11 +349,15 @@ int main(void)
     //     return 1;
     // }
     while(1){
-    cout<<"Enter details"<<endl;
-    string name;
+    //cout<<"Enter details"<<endl;
+    string name=argv[1];
     transform(name.begin(),name.end(),name.begin(),::tolower);
-    float max_p,min_p,max_b,min_b;
-    cin>>name>>min_p>>max_p>>min_b>>max_b;
+    //float max_p,min_p,max_b,min_b;
+    float min_p=float(atoi(argv[2]));
+    float max_p=float(atoi(argv[3]));
+    float min_b=float(atoi(argv[4]));
+    float max_b=float(atoi(argv[5]));
+
     if(min_p>900000||max_p<10000||min_b>4||max_b<1){
         cout<<"No property listings for the given inputs...try again."<<endl;
     }
