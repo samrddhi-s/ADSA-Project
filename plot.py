@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-# Example data for plotting
+# Data for plotting
 dataset_sizes = [500, 1000, 2000]
 search_times = [100, 150, 200]  # in milliseconds
 insertion_times = [50, 75, 100]  # in milliseconds
