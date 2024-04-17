@@ -7,7 +7,7 @@
 #include <queue>
 #include <stdlib.h>
 #include <limits.h>
-const int M = 1000; // order of the B-tree
+const int M = 500; // order of the B-tree
 using namespace std;
 struct Property
 {
