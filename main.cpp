@@ -9,6 +9,7 @@
 #include <limits.h>
 const int M = 1000; // order of the B-tree
 using namespace std;
+//main structure for our property listings
 struct Property
 {
     string name;
@@ -18,6 +19,7 @@ struct Property
     float num_bedrooms;
     
 };
+//structure for comparing names of places
 struct ElementComparator
 {
     bool operator()(const Property &lhs, const Property &rhs) const
@@ -48,6 +50,7 @@ struct cmp
         return lhs.total_score < rhs.total_score;
     }
 };
+//2 nodes each for addressing 2 queries
 struct node
 {
     float min_price;
@@ -64,6 +67,7 @@ struct node2
     node2 *left;
     node2 *right;
 };
+//search helper function which increments a total score based on how accurate the search is to the query
 vector<SearchResult> searchHelper(Node *node, const string &query)
 {
     vector<SearchResult> results;
@@ -171,7 +175,7 @@ vector<SearchResult> search(Node *node, const string &query, vector<Property> &r
     }
     return res;
 }
-
+//function to insert all elements in the B-tree
 void insert(Node *&node, const Property &element)
 {
     if (node == nullptr)
@@ -237,6 +241,7 @@ void insert(Node *&node, const Property &element)
         }
     } 
 }
+//to display terminal output
 std::string SearchResultToJson(const std::vector<SearchResult> &results)
 {
     std::stringstream ss;
@@ -276,7 +281,7 @@ node *builp(vector<sr> &elements, int start, int end)
     parent->elements.insert(parent->elements.end(), right_chilp->elements.begin(), right_chilp->elements.end());
     return parent;
 }
-
+//addressing second query based on min and max number of bedrooms
 vector<sr> sr_query_2(node2 *node2, float min_rooms, float max_rooms)
 {
     if (node2 == nullptr)
@@ -319,6 +324,7 @@ node2 *builp_2(vector<sr> &elements2, int start, int end)
     parent->elements2.insert(parent->elements2.end(), right_chilp->elements2.begin(), right_chilp->elements2.end());
     return parent;
 }
+//addrssing first query checking based on min and max rent
 vector<sr> sr_query(node *node, float min_price, float max_price)
 {
     if (node == nullptr)
@@ -341,6 +347,7 @@ vector<sr> sr_query(node *node, float min_price, float max_price)
     results.insert(results.end(), right_results.begin(), right_results.end());
     return results;
 }
+//main function to take arguments, insert and finally search and print results
 int main(int argc, char* argv[])
 {
     while(1){
