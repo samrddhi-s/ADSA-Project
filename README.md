@@ -1,6 +1,6 @@
 # Real Estate Website with Enhanced Property Search
 
-A real estate website aims to optimise your property search locations by using a combination of B-trees and priority queues along with segment trees for handling queries.
+A real estate website which aims to optimise your property search locations by using a combination of B-trees and priority queues along with segment trees for handling queries.
 
 
 ## Contributors
